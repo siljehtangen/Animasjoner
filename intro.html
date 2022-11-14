@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            background-color: black ;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: white;
+        }
+        #hovedInnhold{
+            display: none;
+        }
+        #introAnimasjon{
+            height: 100vh;
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: center;
+            align-items: center;
+            grid-auto-columns: 2.5rem;
+            gap: 2px;
+            perspective: 200px;
+            
+        }
+        #introAnimasjon span{
+            background-color: brown;
+            text-align: center;
+            font-size: 2rem;
+
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section id="introAnimasjon">
+            
+            
+        </section> 
+        <section id="hovedInnhold">
+            <p>VELKOMMEN SKAL DU VÆRE MIN VENN (:</p>
+        </section>
+    </main>
+    
+    <script>
+        const hovedInnhold = document.querySelector('#hovedInnhold');
+        const introAnimasjon = document.querySelector("#introAnimasjon")
+
+        const setning = "Denne siden er DOPE";
+        const lagSetning = () =>{
+            for(const bokstav of setning){
+                const span = document.createElement("span");
+                span.innerText = bokstav
+                introAnimasjon.appendChild(span);
+            }
+        }
+        const lagAnimasjon = () =>{
+            const bokstaver = document.querySelectorAll("#introAnimasjon span");
+            for(const [indeks, bokstav] of bokstaver.entries()){
+                const keyframes = [
+                    {transform: ("translateX(400px) scale(8) rotateX(360deg)"), opacity: 0},
+                    {transform: ("translateX(0) scale(1) rotateX(0)"), opacity: 1}
+                ]
+                const settings = {
+                    duration: 3000,
+                    easing: "ease",
+                    delay: indeks * 1000,
+                    fill: "both"
+                }
+                if(indeks === bokstaver.length - 1){
+                    const sisteAnimasjon = bokstav.animate(keyframes, settings);
+                    sisteAnimasjon.onfinish = fadeUt;
+                }else{
+                    bokstav.animate(keyframes, settings);
+                }
+            
+            }
+        }
+        const fadeUt = () =>{
+            const fade = introAnimasjon.animate([
+                {opacity: 1}
+            ], {
+                duration: 2000,
+                easing: "ease-in"
+            })
+            fade.onfinish = theEnd;
+            }
+
+            const theEnd = () =>{
+                introAnimasjon.style.display = "none";
+                hovedInnhold.style.display = "grid";
+            }
+        
+        lagSetning();
+        lagAnimasjon();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #ramme{
+            width: 213.33px;
+            background-color: red;
+            overflow: hidden;
+        }
+        #katt{
+            animation: spillanimasjon 0.5s infinite;
+            animation-timing-function: steps(6, end);
+        }
+        @keyframes spillanimasjon{
+            0%{
+                margin-left: 0px;
+            }
+            100%{
+                margin-left: -1280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="ramme">
+        <img id="katt" src="./Bildfiler Kapittel 9 2/ninjakatt.png" alt="">
+    </div>
+</body>
+</html>
